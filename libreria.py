@@ -147,7 +147,7 @@ def main():
     #     ("5", "6"),
     #     ("7", "8"),
     #     ])
-     convertTo128kbps(r"E:\128")
+     convertTo128kbps(r"E:\helloween")
     # print("Terminado")
     # name(r"C:\Users\Hans\Music\LL\虹ヶ咲学園スクールアイドル同好会")
     # crop(r"G:\Mi unidad\LL\spam")

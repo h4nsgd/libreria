@@ -3,10 +3,10 @@
 import os
 from os import listdir, chdir
 from os.path import isfile, join
-import eyed3 as e3
+# import eyed3 as e3
 import shutil
 import subprocess as sp
-
+from pathlib import Path
 
 def renameFiles(mypath):
     chdir(mypath)
@@ -93,6 +93,17 @@ def pngjpg2jpg(mypath):
         print(i)
         c += 1
 
+def encodeToWebp(mypath):
+    chdir(mypath)
+    c = 90
+    for i in [
+            f for f in listdir(mypath) if (isfile(join(mypath, f)) and (
+                (".bmp" in f) or (".jpg" in f) or (".png" in f) or (".jpeg" in f)))
+    ]:
+        os.system(f'ffmpeg -i "{i}" -loglevel error -c:v libwebp "{Path(i).stem}.webp"')
+        #os.system(f'ffmpeg -i "{i}" -loglevel error "{i[:-4]}-r.jpg"')
+        print(i)
+        c += 1
 
 def unrarAll(mypath):
     pwrd = "oldmusic"
@@ -147,7 +158,8 @@ def main():
     #     ("5", "6"),
     #     ("7", "8"),
     #     ])
-     convertTo128kbps(r"E:\helloween")
+    # convertTo128kbps(r"E:\helloween")
+    encodeToWebp(r"C:\Users\hansg\Documents\git\interglick\public\img\home")
     # print("Terminado")
     # name(r"C:\Users\Hans\Music\LL\虹ヶ咲学園スクールアイドル同好会")
     # crop(r"G:\Mi unidad\LL\spam")

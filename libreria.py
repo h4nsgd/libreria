@@ -34,8 +34,8 @@ def reduceTo1k(mypath):
 
 
 def convertTo128kbps(mypath):
-    #Convierte todos los .mp3 dentro de "mypath" a 192kbps y los
-    #guarda en un carpeta "192kbps" debajo de "mypath" conservando el arbol de archivos.
+    #Convierte todos los .mp3 y .flac dentro de "mypath" a 128kbps y los
+    #guarda en una carpeta "128kbps" debajo de "mypath" conservando el arbol de archivos.
 
     newFolder = "128kbps"
 
@@ -48,15 +48,15 @@ def convertTo128kbps(mypath):
             print(f"'{newFolder}' ya existe")
         for j in i[2]:
             file = join(path, j)
-            newFile = join(newPath, j)
             if isfile(file):
-                if ".mp3" in j:
+                if (".mp3" in j) or (".flac" in j):
+                    newFile = join(newPath, Path(j).stem+".mp3")
                     os.system(
                         f'ffmpeg -i "{file}" -codec:a libmp3lame -loglevel error -b:a 128k "{newFile}"'
                     )
                     print(f"Converted to\t{newFile}")
-                elif ".flac" in j:
-                    pass
+                # elif ".flac" in j:
+                #     pass
                         # print(f"Converting \t{file}")
                         # os.system(
                         #     f'ffmpeg -y -i "{file}" -codec:a libmp3lame -b:a 128k -q:a 0 -map_metadata 0 -id3v2_version 3 -write_id3v1 1 "{newFile}"'
@@ -65,6 +65,7 @@ def convertTo128kbps(mypath):
                         # print(f"Converted to\t{newFile}")
                         # return
                 if (".jpg" in j) or (".png" in j) or (".jpeg" in j):
+                    newFile = join(newPath, j)
                     shutil.copy(file.strip(), newFile.strip())
                     print(f"Copied to\t\t{newFile}")
 
@@ -158,8 +159,8 @@ def main():
     #     ("5", "6"),
     #     ("7", "8"),
     #     ])
-    # convertTo128kbps(r"E:\helloween")
-    encodeToWebp(r"C:\Users\hansg\Documents\git\interglick\public\img\home")
+    convertTo128kbps(r"C:\Users\mig_1\Music\Radiohead2-final")
+    # encodeToWebp(r"C:\Users\hansg\Documents\git\interglick\public\img\home")
     # print("Terminado")
     # name(r"C:\Users\Hans\Music\LL\虹ヶ咲学園スクールアイドル同好会")
     # crop(r"G:\Mi unidad\LL\spam")
